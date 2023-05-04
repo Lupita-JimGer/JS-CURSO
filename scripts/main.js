@@ -2,7 +2,7 @@ alert ("BIENVENIDO, ESTA PÁGINA AYUDA A CALCULAR UN RESUMEN DE LOS GASTOS DE UN
 
 alert("ES NECESARIO INGRESAR LOS DATOS QUE SE TE PIDEN PARA REALIZAR LA OPERACIÓN");
 
-//CAPTURANDO NOMBRE Y APELLIDOS
+//CAPTURANDO NOMBRE
 
 console.log("Ingresaremos Nombre");
 
@@ -32,9 +32,11 @@ validarNombre();
 
 console.log("Ingresando Capital");
 
+let capital = 0;
+
 while (true)
 {
-    var capital = parseFloat(prompt("¿CUÁL ES TU CAPITAL"));
+    capital = parseFloat(prompt("¿CUÁL ES EL PRESUPUESTO INICIAL DE ESTA SEMANA?"));
     
     if (!isNaN(capital) && capital != null && capital != " ")
     {
@@ -47,24 +49,40 @@ while (true)
     }
 }
 // INGRESANDO GASTOS
+ class gastos
+ {
+    constructor(nombreGasto,cantidad)
+    {
+        this.nombreGasto= nombreGasto.toUpperCase();
+        this.cantidad = parseFloat(cantidad);
+        this.noGasto = false;
+    }
+ }
 
+ let misGastos = [];
 
+ let respuesta = "SI";
 
 console.log("Ingresaremos la lista de gastos");
 
-let suma= 0;
+
+do {
+  let nombreGasto = prompt("INGRESA EL NOMBRE O RAZÓN DEL GASTO");
+  let cantidad = prompt("MONTO DEL GASTO");
+  const unGasto = new gastos(nombreGasto, cantidad);
+  misGastos.push(unGasto);
+  respuesta = prompt("¿INGRESARÁS MAS GASTOS? SI/NO");
+} while (respuesta.toUpperCase() !== "NO");
 
 
-    for (let i = 1 ; i <= 7; i++)
-        {
-            let gasto = parseFloat(prompt("INGRESA GASTO DEL DÍA "+ i));
-            suma = suma + gasto;
-        }
+let suma = 0;
+for (const unGasto of misGastos) {
+  suma = suma + unGasto.cantidad;
+}
+    let total= capital - suma; 
 
-        total= capital - suma; 
+    console.log("Mostrando resultados");
 
-        console.log("Mostrando resultados");
-
-        alert (nombre.toUpperCase() + " " + "\n" + "INICIASTE LA SEMANA CON: $"+ capital + "\n" + "EN TOTAL HAS GASTADO: $" + suma + "\n" + "TE QUEDAN: $" + total);
+    alert (nombre.toUpperCase() + " " + "\n" + "INICIASTE LA SEMANA CON: $"+ capital + "\n" + "EN TOTAL HAS GASTADO: $" + suma + "\n" + "TE QUEDAN: $" + total);
 
 
